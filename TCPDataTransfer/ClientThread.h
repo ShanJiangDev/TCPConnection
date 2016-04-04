@@ -7,7 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
-@interface ClientThread : NSThread
+@interface ClientThread : NSThread{
+
+    CFSocketRef obj_client;
+    
+}
+-(void)initializeClient;
 -(void)main;
+//-(void)TCPClientCallBackHandler;
+-(void)DisconnectFromServer;
+-(void)SendTCPDataPacke:(const char*) data;
+
 @end
