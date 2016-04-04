@@ -12,6 +12,8 @@
 
 -(void)initializedServer{
     
+    // Create server socket
+    
     CFSocketContext sctx = {0, (__bridge void *)(self),NULL,NULL,NULL};
     
     obj_server = CFSocketCreate(kCFAllocatorDefault, AF_INET, SOCK_STREAM, IPPROTO_TCP,kCFSocketAcceptCallBack,TCPServerCallBackHandler, &sctx);
@@ -40,6 +42,14 @@
     CFRelease(loopref);
     
     CFRunLoopRun();
+}
+
+-(void)stopServer{
+    
+    CFSocketInvalidate(obj_server);
+    CFRelease(obj_server);
+    CFRunLoopStop(CFRunLoopGetCurrent());
+                  
 }
 
 void TCPServerCallBackHandler(CFSocketRef s, CFSocketCallBackType callbacktype, CFDataRef address, const void *data, void *info){

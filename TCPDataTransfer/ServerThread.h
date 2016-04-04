@@ -18,4 +18,5 @@
 
 -(void)initializedServer;
 -(void)main;
+-(void)stopServer;
 @end
